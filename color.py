@@ -20,3 +20,31 @@ cell_colors = {
     1024: "#EDC436",
     2048: "#EDC126"
 }
+
+cell_number_color = {
+    2: "#7e756b",
+    4: "#787168",
+    8: "#faf7f2",
+    16: "#faf7f2",
+    32: "#faf7f2",
+    64: "#faf7f2",
+    128: "#faf7f2",
+    256: "#faf7f2",
+    512: "#faf7f2",
+    1024: "#faf7f2",
+    2048: "#faf7f2"
+}
+
+cell_number_font = {
+    2: ("Helvetica", 55, "bold"),
+    4: ("Helvetica", 55, "bold"),
+    8: ("Helvetica", 55, "bold"),
+    16: ("Helvetica", 50, "bold"),
+    32: ("Helvetica", 50, "bold"),
+    64: ("Helvetica", 50, "bold"),
+    128: ("Helvetica", 45, "bold"),
+    256: ("Helvetica", 45, "bold"),
+    512: ("Helvetica", 45, "bold"),
+    1024: ("Helvetica", 40, "bold"),
+    2048: ("Helvetica", 40, "bold")
+}
