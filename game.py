@@ -140,6 +140,7 @@ class Game(tk.Frame):
         self.stack()
         self.add_new_tile()
         self.update_gui()
+        self.game_over()
 
     def right(self, event):
         self.reverse()
@@ -149,6 +150,7 @@ class Game(tk.Frame):
         self.reverse()
         self.add_new_tile()
         self.update_gui()
+        self.game_over()
 
     def up(self, event):
         self.transpose()
@@ -158,6 +160,7 @@ class Game(tk.Frame):
         self.transpose()
         self.add_new_tile()
         self.update_gui()
+        self.game_over()
 
 
 
@@ -171,6 +174,8 @@ class Game(tk.Frame):
         self.transpose()
         self.add_new_tile()
         self.update_gui()
+        self.game_over()
+
 
     def hort_move(self):
         for i in range(4):
@@ -178,6 +183,15 @@ class Game(tk.Frame):
                 if self.martix[i][j] == self.matrix[i][j + 1]:
                     return True
         return False
+
+
+    def vert_move(self):
+        for i in range(3):
+            for j in range(4):
+                if self.matrix[i][j] == self.matrix[i+1][j]:
+                    return True
+        return False
+
 
     def game_over(self):
         if any(2048 in row for row in self.matrix):
@@ -189,6 +203,18 @@ class Game(tk.Frame):
                 fg=c.game_over_font_color,
                 font=c.game_over_font,
             ).pack()
-        elif not any(0 in row for row in self.matrix)
+        elif not any(0 in row for row in self.matrix) and not self.hort_move() and not self.vert_move():
+            game_over_frame = tk.Frame(self.main_grid, borderwidth=2)
+            game_over_frame.place(relx=0.5, rely=0.5, anchor='center')
+            tk.Label(
+                text="Game Over",
+                bg=c.loser_bg,
+                fg=c.game_over_font_color,
+                font=c.game_over_font,
+            ).pack()
 
-Game()
+def main():
+    Game()
+
+if __name__ == "__main__":
+    main()
