@@ -10,8 +10,8 @@ class Game(tk.Frame):
         self.master.title('2048')
 
         self.main_grid = tk.Frame(
-            self, bg=c.GRID_COLOR, bd=3, width=400, height=400)
-        self.main_grid.grid(pady=(80, 0))
+            self, bg=c.GRID_COLOR, bd=3, width=600, height=600)
+        self.main_grid.grid(pady=(100, 0))
         self.make_GUI()
         self.start_game()
 
@@ -201,7 +201,7 @@ class Game(tk.Frame):
 
     # Check if any moves are possible
 
-    def horizontal_move_exists(self):
+    def hort_move(self):
         for i in range(4):
             for j in range(3):
                 if self.matrix[i][j] == self.matrix[i][j + 1]:
@@ -209,7 +209,7 @@ class Game(tk.Frame):
         return False
 
 
-    def vertical_move_exists(self):
+    def vert_move(self):
         for i in range(3):
             for j in range(4):
                 if self.matrix[i][j] == self.matrix[i + 1][j]:
@@ -229,7 +229,7 @@ class Game(tk.Frame):
                 bg=c.WINNER_BG,
                 fg=c.GAME_OVER_FONT_COLOR,
                 font=c.GAME_OVER_FONT).pack()
-        elif not any(0 in row for row in self.matrix) and not self.horizontal_move_exists() and not self.vertical_move_exists():
+        elif not any(0 in row for row in self.matrix) and not self.hort_move() and not self.vert_move():
             game_over_frame = tk.Frame(self.main_grid, borderwidth=2)
             game_over_frame.place(relx=0.5, rely=0.5, anchor="center")
             tk.Label(
