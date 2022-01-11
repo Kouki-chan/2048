@@ -91,16 +91,22 @@ class Game(tk.Frame):
                 if self.matrix[i][j] != 0:
                     new_matrix[i][fill_position] = self.matrix[i][j]
                     fill_position += 1
+        changed = False
+        # check if new_matrix = self.matrix, if not change d= True
         self.matrix = new_matrix
+        return changed
 
 
     def combine(self):
+        changed = False
         for i in range(4):
             for j in range(3):
                 if self.matrix[i][j] != 0 and self.matrix[i][j] == self.matrix[i][j + 1]:
                     self.matrix[i][j] *= 2
                     self.matrix[i][j + 1] = 0
                     self.score += self.matrix[i][j]
+                    changed = True
+        return changed
 
 
     def reverse(self):
@@ -130,6 +136,10 @@ class Game(tk.Frame):
             col = random.randint(0, 3)
         self.matrix[row][col] = random.choice([2, 4])
 
+    #checks if a move have been made
+
+    #def move_made(self):
+
 
     # Update the GUI to match the matrix
 
@@ -156,47 +166,56 @@ class Game(tk.Frame):
     # Arrow-Press Functions
 
     def left(self, event):
-        self.stack()
-        self.combine()
-        self.stack()
-        self.add_new_tile()
-        self.update_GUI()
-        self.game_over()
+        changed = False
+        changed = self.stack () or changed
+        changed = self.combine() or changed
+        changed = self.stack() or changed
+        if changed:
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
 
 
     def right(self, event):
         self.reverse()
-        self.stack()
-        self.combine()
-        self.stack()
-        self.reverse()
-        self.add_new_tile()
-        self.update_GUI()
-        self.game_over()
+        if self.stack():
+            self.combine()
+            self.stack()
+            self.reverse()
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
+        else:
+            self.reverse()
 
 
     def up(self, event):
         self.transpose()
-        self.stack()
-        self.combine()
-        self.stack()
-        self.transpose()
-        self.add_new_tile()
-        self.update_GUI()
-        self.game_over()
+        if self.stack():
+            self.combine()
+            self.stack()
+            self.transpose()
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
+        else:
+            self.transpose()
 
 
     def down(self, event):
         self.transpose()
         self.reverse()
-        self.stack()
-        self.combine()
-        self.stack()
-        self.reverse()
-        self.transpose()
-        self.add_new_tile()
-        self.update_GUI()
-        self.game_over()
+        if self.stack():
+            self.combine()
+            self.stack()
+            self.reverse()
+            self.transpose()
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
+        else:
+            self.reverse()
+            self.transpose()    
 
 
     # Check if any moves are possible
@@ -238,6 +257,7 @@ class Game(tk.Frame):
                 bg=c.LOSER_BG,
                 fg=c.GAME_OVER_FONT_COLOR,
                 font=c.GAME_OVER_FONT).pack()
+    
 
 
 def main():
