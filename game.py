@@ -182,9 +182,16 @@ class Game(tk.Frame):
 
     def right(self, event):
         self.reverse()
-        if self.stack():
+        if self.combine():
+            self.stack()
+            self.reverse()
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
+        elif self.stack():
             self.combine()
             self.stack()
+            self.combine()
             self.reverse()
             self.add_new_tile()
             self.update_GUI()
