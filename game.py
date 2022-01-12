@@ -167,11 +167,14 @@ class Game(tk.Frame):
     # Arrow-Press Functions
 
     def left(self, event):
-        changed = False
-        changed = self.stack () or changed
-        changed = self.combine() or changed
-        changed = self.stack() or changed
-        if changed:
+        if self.stack():
+            self.combine
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
+        elif self.combine():
+            self.stack()
+            self.combine()
             self.add_new_tile()
             self.update_GUI()
             self.game_over()
@@ -181,6 +184,12 @@ class Game(tk.Frame):
         self.reverse()
         if self.stack():
             self.combine()
+            self.stack()
+            self.reverse()
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
+        elif self.combine():
             self.stack()
             self.reverse()
             self.add_new_tile()
@@ -199,6 +208,12 @@ class Game(tk.Frame):
             self.add_new_tile()
             self.update_GUI()
             self.game_over()
+        elif self.combine():
+            self.stack()
+            self.transpose()
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
         else:
             self.transpose()
 
@@ -208,6 +223,13 @@ class Game(tk.Frame):
         self.reverse()
         if self.stack():
             self.combine()
+            self.stack()
+            self.reverse()
+            self.transpose()
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
+        elif self.combine():
             self.stack()
             self.reverse()
             self.transpose()
