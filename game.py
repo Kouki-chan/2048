@@ -84,6 +84,7 @@ class Game(tk.Frame):
     # Matrix Manipulation Functions
 
     def stack(self):
+        changed = False
         new_matrix = [[0] * 4 for _ in range(4)]
         for i in range(4):
             fill_position = 0
@@ -91,8 +92,8 @@ class Game(tk.Frame):
                 if self.matrix[i][j] != 0:
                     new_matrix[i][fill_position] = self.matrix[i][j]
                     fill_position += 1
-        changed = False
-        # check if new_matrix = self.matrix, if not change d= True
+        if self.matrix != new_matrix:
+            changed = True
         self.matrix = new_matrix
         return changed
 
