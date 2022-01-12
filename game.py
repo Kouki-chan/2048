@@ -169,12 +169,12 @@ class Game(tk.Frame):
     def left(self, event):
         if self.stack():
             self.combine
+            self.stack()
             self.add_new_tile()
             self.update_GUI()
             self.game_over()
         elif self.combine():
             self.stack()
-            self.combine()
             self.add_new_tile()
             self.update_GUI()
             self.game_over()
