@@ -117,6 +117,9 @@ class Game(tk.Frame):
             for j in range(4):
                 new_matrix[i].append(self.matrix[i][3 - j])
         self.matrix = new_matrix
+        for i in range(len(self.matrix)):
+            print(self.matrix[i])
+        print("")
 
 
     def transpose(self):
@@ -166,8 +169,14 @@ class Game(tk.Frame):
 
     # Arrow-Press Functions
 
+    '''
     def left(self, event):
-        if self.stack():
+        if self.combine():
+            self.stack()
+            self.add_new_tile()
+            self.update_GUI()
+            self.game_over()
+        elif self.stack():
             self.combine
             self.stack()
             self.add_new_tile()
@@ -177,18 +186,22 @@ class Game(tk.Frame):
             self.stack()
             self.add_new_tile()
             self.update_GUI()
-            self.game_over()
+            self.game_over()'''
 
+    def left(self, event):
+        change1 = False
+        change2 = False
+        change1 = self.stack()
+        change2 = self.combine()
+        self.stack()
+        if change1 or change2:
+            self.add_new_tile()
+        self.update_GUI()
+        self.game_over()
 
     def right(self, event):
         self.reverse()
-        if self.combine():
-            self.stack()
-            self.reverse()
-            self.add_new_tile()
-            self.update_GUI()
-            self.game_over()
-        elif self.stack():
+        if self.stack():
             self.combine()
             self.stack()
             self.combine()

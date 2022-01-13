@@ -45,6 +45,6 @@ CELL_NUMBER_FONTS = {
     128: ("Helvetica", 40, "bold"),
     256: ("Helvetica", 40, "bold"),
     512: ("Helvetica", 40, "bold"),
-    1024: ("Helvetica", 35, "bold"),
-    2048: ("Helvetica", 35, "bold")
+    1024: ("Helvetica", 30, "bold"),
+    2048: ("Helvetica", 30, "bold")
 }
