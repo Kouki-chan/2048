@@ -1,5 +1,5 @@
 # 2048
 
-##TEST
+//TEST
 
 This is just a test
